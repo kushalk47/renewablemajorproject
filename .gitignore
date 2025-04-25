@@ -8,8 +8,6 @@ venv/
 env/
 .env
 
-# Database files (if sensitive or large)
-energy_filled.db
 
 
 
