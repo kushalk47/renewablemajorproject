@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.env
+
+# Database files (if sensitive or large)
+energy_filled.db
+
+# Model files (if you regenerate them)
+*.joblib
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Flask-specific
+instance/
+*.sqlite
+
+# Optional: Static plots directory (if reverted to saving)
+# static/plots/
+
+# Ignore Python dependencies file if managed manually
+# requirements.txt (uncomment if you don’t track it)
+
+# Ignore uploaded files or user data (if any)
+uploads/

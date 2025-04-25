@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title style="color: #ffffff; background-color: #1e90ff; padding: 10px; text-align: center; font-family: 'Roboto', sans-serif;">Energy Consumption Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Roboto', sans-serif; background-color: #e6f0fa; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; animation: fadeIn 1.5s ease-in;">
+    <div style="max-width: 800px; margin: 20px; padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); animation: fadeIn 1.5s ease-in 0.5s backwards;">
+        <h1 style="color: #1e90ff; text-align: center; font-size: 2.5em; margin-bottom: 20px; animation: fadeIn 1.5s ease-in;">Energy Consumption Prediction</h1>
+        <form method="POST" style="display: flex; flex-direction: column; animation: fadeIn 1.5s ease-in 0.7s backwards;">
+            <label for="country" style="color: #333333; font-weight: bold; margin-bottom: 5px;">Country:</label>
+            <select name="country" required style="padding: 10px; margin-bottom: 10px; border: 2px solid #1e90ff; border-radius: 5px; font-size: 1em; background-color: #f8f9fa; transition: border-color 0.3s;">
+                {% for country in countries %}
+                    <option value="{{ country }}" style="padding: 5px;">{{ country }}</option>
+                {% endfor %}
+            </select><br>
+            <label for="growth_rate" style="color: #333333; font-weight: bold; margin-bottom: 5px;">Growth Rate (%):</label>
+            <input type="number" step="0.1" name="growth_rate" placeholder="Optional (uses ML prediction if blank)" style="padding: 10px; margin-bottom: 10px; border: 2px solid #1e90ff; border-radius: 5px; font-size: 1em; background-color: #f8f9fa; transition: border-color 0.3s;"><br>
+            <button type="submit" style="padding: 12px 20px; background-color: #28a745; color: #ffffff; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; transition: transform 0.3s, background-color 0.3s; animation: fadeIn 1.5s ease-in 0.9s backwards;"
+                    onmouseover="this.style.transform='scale(1.1)'; this.style.backgroundColor='#218838';"
+                    onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#28a745';">Predict</button>
+        </form>
+
+        {% if predicted_growth_rate %}
+            <p style="color: #28a745; font-weight: bold; font-size: 1.2em; margin-top: 20px; animation: fadeIn 1.5s ease-in 1.1s backwards;"><strong>Predicted Growth Rate:</strong> {{ predicted_growth_rate }}%</p>
+        {% endif %}
+        {% if prediction %}
+            <p style="color: #28a745; font-weight: bold; font-size: 1.2em; margin-top: 10px; animation: fadeIn 1.5s ease-in 1.3s backwards;"><strong>Renewable Consumption (2050):</strong> {{ prediction }} TWh</p>
+        {% endif %}
+        {% if non_renewable_prediction %}
+            <p style="color: #f4a261; font-weight: bold; font-size: 1.2em; margin-top: 10px; animation: fadeIn 1.5s ease-in 1.5s backwards;"><strong>Non-Renewable Consumption (2050):</strong> {{ non_renewable_prediction }} TWh</p>
+        {% endif %}
+        {% if plot_url %}
+            <img src="{{ plot_url }}" alt="Energy Consumption Plot" style="max-width: 100%; margin-top: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); animation: pulse 2s infinite;">
+        {% endif %}
+        {% if error %}
+            <p style="color: #dc3545; font-weight: bold; font-size: 1.1em; margin-top: 10px; animation: fadeIn 1.5s ease-in 1.7s backwards;">{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</body>
+</html>
