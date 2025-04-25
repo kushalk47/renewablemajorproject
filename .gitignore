@@ -11,8 +11,7 @@ env/
 # Database files (if sensitive or large)
 energy_filled.db
 
-# Model files (if you regenerate them)
-*.joblib
+
 
 # IDE and editor files
 .vscode/
